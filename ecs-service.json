@@ -6,14 +6,14 @@
   "launchType": "FARGATE",
   "networkConfiguration": {
     "awsvpcConfiguration": {
-      "subnets": ["subnet-12345678", "subnet-87654321"],
-      "securityGroups": ["sg-12345678"],
+      "subnets": ["subnet-0d0617faba13e1c27", "subnet-031b8ce6c344f1021"],
+      "securityGroups": ["sg-0ec3869e9b3402b62"],
       "assignPublicIp": "ENABLED"
     }
   },
   "loadBalancers": [
     {
-      "targetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:ACCOUNT_ID:targetgroup/video-converter-tg/1234567890123456",
+      "targetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:173181180489:targetgroup/video-converter-tg/6b6ec5cdc0bbafde",
       "containerName": "video-converter",
       "containerPort": 8000
     }

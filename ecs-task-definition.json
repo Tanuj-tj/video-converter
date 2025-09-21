@@ -4,12 +4,12 @@
   "requiresCompatibilities": ["FARGATE"],
   "cpu": "512",
   "memory": "1024",
-  "executionRoleArn": "arn:aws:iam::ACCOUNT_ID:role/ecsTaskExecutionRole",
-  "taskRoleArn": "arn:aws:iam::ACCOUNT_ID:role/VideoConverterTaskRole",
+  "executionRoleArn": "arn:aws:iam::173181180489:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::173181180489:role/VideoConverterTaskRole",
   "containerDefinitions": [
     {
       "name": "video-converter",
-      "image": "ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/video-converter:latest",
+      "image": "173181180489.dkr.ecr.us-east-1.amazonaws.com/video-converter:latest",
       "portMappings": [
         {
           "containerPort": 8000,
@@ -26,15 +26,15 @@
       "secrets": [
         {
           "name": "UPLOAD_BUCKET",
-          "valueFrom": "arn:aws:ssm:us-east-1:ACCOUNT_ID:parameter/video-converter/upload-bucket"
+          "valueFrom": "arn:aws:ssm:us-east-1:173181180489:parameter/video-converter/upload-bucket"
         },
         {
           "name": "CONVERTED_BUCKET",
-          "valueFrom": "arn:aws:ssm:us-east-1:ACCOUNT_ID:parameter/video-converter/converted-bucket"
+          "valueFrom": "arn:aws:ssm:us-east-1:173181180489:parameter/video-converter/converted-bucket"
         },
         {
           "name": "SQS_QUEUE_URL",
-          "valueFrom": "arn:aws:ssm:us-east-1:ACCOUNT_ID:parameter/video-converter/sqs-queue-url"
+          "valueFrom": "arn:aws:ssm:us-east-1:173181180489:parameter/video-converter/sqs-queue-url"
         }
       ],
       "logConfiguration": {
