@@ -2,18 +2,31 @@
 
 ## Project Architecture
 
-```
-User Interface (HTML/JS)
-    ↓ (Upload video + formats)
-FastAPI Backend
-    ↓ (Store video in S3, send message to SQS)
-AWS S3 (Original videos)
-    ↓
-AWS SQS Queue
-    ↓ (Trigger)
-AWS Lambda Function (FFmpeg processing)
-    ↓ (Store converted videos)
-AWS S3 (Converted videos)
+```mermaid
+graph TD
+    A[User Browser] -->|1. Upload Video + Formats| B[Application Load Balancer]
+    B -->|Route Traffic| C[ECS Fargate Tasks]
+    C -->|2. Store Video| D[S3 Upload Bucket]
+    C -->|3. Queue Jobs| E[SQS Queue]
+    E -->|4. Trigger| F[Lambda Function]
+    F -->|5. Download Video| D
+    F -->|6. Convert with FFmpeg| G[FFmpeg Layer]
+    F -->|7. Upload Converted| H[S3 Converted Bucket]
+    C -->|8. Check Status| H
+    C -->|9. Generate Download URL| H
+    A -->|10. Download Videos| H
+    
+    subgraph "AWS Services"
+        D
+        E
+        F
+        G
+        H
+    end
+    
+    subgraph "ECS Fargate"
+        C
+    end
 ```
 
 ## Components Flow:
@@ -22,6 +35,9 @@ AWS S3 (Converted videos)
 3. SQS triggers Lambda function for each conversion format
 4. Lambda downloads video, converts using FFmpeg, uploads back to S3
 5. User can check conversion status via FastAPI endpoint
+
+## UI
+![alt text](image.png)
 
 ## Setup Instructions
 
