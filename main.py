@@ -7,9 +7,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
 import boto3
 from botocore.exceptions import ClientError
-from dotenv import load_dotenv
-
-load_dotenv()
+# Environment variables loaded from ECS task definition
 
 app = FastAPI(title="Video Conversion API")
 
